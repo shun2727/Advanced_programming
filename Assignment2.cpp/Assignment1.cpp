@@ -1,38 +1,4 @@
-#include <iostream>
-#include <random>
-
-#include <sstream> //for stringstream
-#include <string> //for std::string
-#include <fstream> //for files
-#include <array> //for array
-
-#ifndef SIZE
-#define SIZE 20 //consistent sizing across workers and tasks to the limit of 20
-#endif
-
-typedef struct s_worker
-{
-	int workerId;
-	std::string name;
-	int variability;
-	int ability;
-	int experienceLabel;
-	
-} t_worker;
-
-typedef struct s_tasks
-{
-	int taskId;
-	std::string description;
-	int uncertainty;
-	int difficulty;
-	int priorityLabel;
-
-	int workerCount;
-	std::array<int, SIZE> workerIds;
-	int bestWorkerId;
-
-} t_tasks;
+#include "header.hpp"
 
 template <typename T>
 T read_value(std::stringstream& stream, char delimiter)
@@ -49,7 +15,10 @@ T read_value(std::stringstream& stream, char delimiter)
 }
 
 /**
- * return amount of tasks
+ * @brief 
+ * 
+ * @param tasks_arr 
+ * @return int 
  */
 int parse_task(auto &tasks_arr)
 {
@@ -81,7 +50,12 @@ int parse_task(auto &tasks_arr)
 	
     return taskIndex;
 }
-
+/**
+ * @brief 
+ * 
+ * @param worker_arr 
+ * @return int 
+ */
 int parse_workers(auto &worker_arr)
 {
 	auto worker_index{0};
@@ -90,7 +64,7 @@ int parse_workers(auto &worker_arr)
 		return (0);
 
 	std ::string file_line;
-	while (worker_index < SIZE && std ::getline(file, file_line))
+    while (worker_index < worker_arr.size() && std ::getline(file, file_line))
 	{
 		std::stringstream line_stream(file_line);
 
@@ -111,13 +85,12 @@ void debug_tasks(auto& tasks, int task_size)
 
     for (int i{0}; i < task_size; ++i)
     {
-        std::cout << "Task ID: " << tasks[i].taskId << '\n';
-        std::cout << "Description: " << tasks[i].description << '\n';
-        std::cout << "Uncertainty: " << tasks[i].uncertainty << '\n';
-        std::cout << "Difficulty: " << tasks[i].difficulty << '\n';
-        std::cout << "Priority: " << tasks[i].priorityLabel << '\n';
-
-        std::cout << "Workers: ";
+        std::cout << "Task ID: " << tasks[i].taskId
+                  << " | Description: " << tasks[i].description
+                  << " | Uncertainty: " << tasks[i].uncertainty
+                  << " | Difficulty: " << tasks[i].difficulty
+                  << " | Priority: " << tasks[i].priorityLabel
+                  << " | Workers: ";
 
         for (int j{0}; j < tasks[i].workerCount; ++j)
         {
@@ -127,7 +100,7 @@ void debug_tasks(auto& tasks, int task_size)
                 std::cout << ", ";
         }
 
-        std::cout << "\n\n";
+        std::cout << '\n';
     }
 }
 void debug_workers(auto& workers, int worker_size)
@@ -136,71 +109,57 @@ void debug_workers(auto& workers, int worker_size)
 
     for (int i{0}; i < worker_size; ++i)
     {
-        std::cout << "Worker ID: "
-                  << workers[i].workerId << '\n';
-
-        std::cout << "Name: "
-                  << workers[i].name << '\n';
-
-        std::cout << "Variability: "
-                  << workers[i].variability << '\n';
-
-        std::cout << "Ability: "
-                  << workers[i].ability << '\n';
-
-        std::cout << "Experience: "
-                  << workers[i].experienceLabel << '\n';
-
-        std::cout << '\n';
-    }
-}
-void print_results(const auto tasks, auto task_size)
-{
-	std::cout << "\n===== RESULTS =====\n";
-
-    for (int i{0}; i < task_size; ++i)
-    {
-        std::cout << "Task "
-                  << tasks[i].taskId
-                  << " -> Worker "
-                  << tasks[i].bestWorkerId
+        std::cout << "Worker ID: " << workers[i].workerId
+                  << " | Name: " << workers[i].name
+                  << " | Variability: " << workers[i].variability
+                  << " | Ability: " << workers[i].ability
+                  << " | Experience: " << workers[i].experienceLabel
                   << '\n';
     }
 }
 
-int calculateAvg(const auto task, auto normalDistriution)
+
+/**
+ * @brief Calculates the worker's average performance
+ * 
+ * @param task current tasks's struct, const as no value is manipulated
+ * @param normalDistribution 
+ * @param worker worker's struct according to it's id, const as no value is manipulated
+ * @return Worker's average performance 
+ */
+auto calculateAvg(const auto task, auto normalDistribution, const auto worker)
 {
 	std::random_device rd;
-	std::default_random_engine engine(rd());
-	// Low priority = 10 samples
-	// High priority = 15 samples
-	int sampleCount;
-	if (task.priorityLabel == 0)
-		sampleCount = 10;
-	else
-		sampleCount = 15;
-
-	// Generate samples
+	int sampleAmt;
 	double total = 0;
 
-	for (int j{0}; j < sampleCount; ++j)
-	{
-		total += normalDistribution(engine);
-	}
+	if (task.priorityLabel == 0)
+		sampleAmt = 10; // Low priority loop 10 
+	else
+		sampleAmt = 15; // High priority loop 15 
 
-	// Calculate average
-	double average = total / sampleCount;
+	for (int j{0}; j < sampleAmt; ++j)
+		total += normalDistribution(rd);
 
-	// Senior worker gets +2
-	if (worker.experienceLabel == 1)
+	double average = total / sampleAmt;
+
+	if (worker.experienceLabel == 1) // Senior worker +2
 		average += 2;
+
+	return (average);
 }
 
-int findBestWorker(auto& task, auto& workers)
+/**
+ * @brief find workerId of worker with best average performance, will print score of each worker for comparison purposes
+ * 
+ * @param task current task being processed
+ * @param workers accepts worker array, const because no data is manipulated
+ * @return int workerId of worker with best average performance
+ */
+int findBestWorker(auto& task, const auto& workers)
 {
-
-    double bestScore = -std::numeric_limits<double>::infinity();
-    int bestWorkerId = -1;
+    double bestScore = 0; //assuming all the best scores are impossible to be negative values
+    int bestWorkerId = -1; //-1 is placed because no worker is id -1
 
     for (int i{0}; i < task.workerCount; ++i)
     {
@@ -212,11 +171,13 @@ int findBestWorker(auto& task, auto& workers)
         if (sd == 0)
             sd = 1;
 
+		//create nd centred around mean and sd of 5
+		//initialize the normal distribution
         std::normal_distribution<double> normalDistribution(mean, sd);
 
-		calculateAvg
+        double average = calculateAvg(task, normalDistribution, worker);
+        std::cout << "Worker ID: " << worker.workerId << ", Name: " << worker.name << ", Average performance score: " << average << '\n';
 
-        // Check if this is the best worker so far
         if (average > bestScore)
         {
             bestScore = average;
@@ -224,12 +185,8 @@ int findBestWorker(auto& task, auto& workers)
         }
     }
 
-    return bestWorkerId;
-}
-
-void print_result()
-{
-
+    std::cout << "Best worker for task \"" << task.description << "\" is Worker ID: " << bestWorkerId << ", Name: " << workers[bestWorkerId].name << ", Score: " << bestScore << "\n\n";
+    return (bestWorkerId);
 }
 
 
@@ -244,16 +201,15 @@ int main()
     if (task_size == 0 || worker_size == 0)
         return (printf("File error\n"), 1);
 
-    //debug_tasks(tasks, task_size);
-    //debug_workers(workers, worker_size);
-	/*
-		for each task
-			task.bestwrokerId = calculatebest worker
-	*/
-	for (auto &task_items :tasks)
-		task_items.bestWorkerId = findBestWorker(task_items, workers, task_size);
+	//uncomment this section to crosscheck if stored info is accurate
+    	//debug_tasks(tasks, task_size);
+    	//debug_workers(workers, worker_size);
 
-	//print task & worker ();
+	for (int i = 0; i < task_size ; ++i)
+	{
+        std::cout << "Details for task \"" << tasks[i].description << "\":\n";
+		tasks[i].bestWorkerId = findBestWorker(tasks[i], workers);
+	}
 
     return 0;
 }

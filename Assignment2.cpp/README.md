@@ -36,11 +36,8 @@ Within a loop :
 	- Calculate standard deviation = | task uncertainty + worker variability (worker variability : what is the performance of the worker from time to time) |
 
 - Calculate **average performance** for each worker :
-	- Using a c++ library function, from the range provided in the standard deviation
-		- extract 10 values by random for low prirority tasks
-		- extract 15 values for high priority tasks
-		- extract an additional 2 values for senior workers
-		- extract an additional 0 values for ordinary workers
+		- Use 10 random draws for low-priority tasks and 15 for high-priority tasks.
+		- Add 2 points to the average for senior workers and 0 for ordinary workers.
 	- Store the output for each workers
 
 - Find the worker with the best performance
@@ -80,5 +77,17 @@ Stringstream :
 stoi :
 	- https://www.geeksforgeeks.org/cpp/convert-string-to-int-in-cpp/
 
-Math funcitons within calBestWorker
+Math funcitons within findBestWorker :
+normal distribution :
+	- https://en.cppreference.com/cpp/numeric/random/normal_distribution
+random number generator : 
+	- essentially asks the system for randome numbers every time 
+	- https://en.cppreference.com/cpp/numeric/random/random_device
+
+General lookup on how to solve:
+	- https://stackoverflow.com/questions/60721093/random-number-from-normal-distribution-in-c
+
+
+span : 
+	- https://en.cppreference.com/cpp/container/span
 	
