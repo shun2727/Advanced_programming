@@ -1,4 +1,5 @@
 /*
+Self note :
 	instead of #ifndef #define
 	#pragma once prevents this header file
     from being included more than once
@@ -7,18 +8,21 @@
 
 #pragma once 
 
-#include <iostream>
-#include <random> 
+#include <iostream> //cout
+#include <random> // for randomdevice (used to get an enthropic value from the system)
 #include <sstream> //for stringstream
 #include <string> //for std::string
 #include <fstream> //for files
 #include <array> //for array
+#include <span> //for span contianer
+#include <cstddef> //for size_t
 
 #ifndef SIZE
-#define SIZE 20 //consistent sizing across workers and tasks to the limit of 20
+#define SIZE 20 //consistent sizing across workers and tasks to the limit of 20 as per assignment stated
 #endif
 
-typedef struct s_worker
+// structs are deliberatly written as such for tidiness 
+typedef struct sWorker
 {
 	int workerId;
 	std::string name;
@@ -28,7 +32,7 @@ typedef struct s_worker
 	
 } t_worker;
 
-typedef struct s_tasks
+typedef struct sTasks
 {
 	int taskId;
 	std::string description;
