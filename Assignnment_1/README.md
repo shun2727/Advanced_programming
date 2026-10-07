@@ -52,9 +52,10 @@ Following are the modifications I made to incorporate modern C++ features (c++ 1
 	- This feature was introduced in C++11.
 
 2. Usage of `auto` and reference calls in function parameters:
-	- Functions such as `parseTask(auto& tasksArr)` use abbreviated function templates. The compiler deduces the array type, so I do not need to write the full template declaration for each function.
 	- Passing arrays by reference avoids copying the whole array when calling these functions.
-	- Using `auto` in function parameters was introduced in C++20.
+	- however, given that in order to use auto, the entire body of the function needs to be declared in the header file, in practice it is quite confusing given that the functions are meant to be in thier respective files, therefore NOT ALL functions ar equiped or uses auto as thier return type or as thier parameters
+	- in this case debug tasks and debug workers are 
+	- Using `auto` in function parameters are introduced in C++20.
 
 3. Usage of `std::array`:
 	- The tasks and workers are stored in `std::array` instead of C-style arrays.
@@ -78,16 +79,16 @@ Following are the modifications I made to incorporate modern C++ features (c++ 1
 
 ### Files
 --- 
-1. driver.cpp : contains the main functions and the ovarall logic for the program
-2. debugger.cpp : showing the values after parsing was not specified by the assignment requirements, therefore i seperated it into another file
-3. header.hpp : contains the struct and libraries needed for the program
+1. driver.cpp : contains the main function
+2. header.cpp : contains functions of the main logic supporting the main funciton
+3. header.h : (althought the converntion is to use header.hpp as per subject requirments it is stored as header.h) contains the struct, function prototypes and libraries needed for the program
 4. README.md : current file with overview of the entire project
 
 ### Complilation guide 
 ---
-To avoid warning compile with the following std flags, then output to `task_assignment` as the program name
+Compile with the following std flags, then output to `task_assignment` as the program name
 ```bash
-	g++ -std=c++20 driver.cpp -o task_assignment
+	g++ -std=c++20 driver.cpp header.cpp -o task_assignment
 ```
 ensure `Workers.txt` and `Tasks.txt` are located in the same folder, then run with
 ``` bash
@@ -110,6 +111,9 @@ ensure `Workers.txt` and `Tasks.txt` are located in the same folder, then run wi
 4. stoi :
 	- https://www.geeksforgeeks.org/cpp/convert-string-to-int-in-cpp/
 
+5. auto :
+	- https://www.geeksforgeeks.org/cpp/abbreviated-function-templates-in-cpp-20/
+
 Math funcitons within findBestWorker :
 1. normal distribution :
 	- https://en.cppreference.com/cpp/numeric/random/normal_distribution
@@ -128,4 +132,4 @@ Math funcitons within findBestWorker :
 ## AI usage
 These resources alone were not sufficient for me to fully grasp the concepts such a when it came to how the normal distribution and random number functions works beneath, how do i utilize span and the usage of stringstream. 
 
-Therefore AI was used to give more compreensive examples, to break down concepts and to provide guidance on implementation. All code was written myself, with exceptions that some were references from forums and learning websites. 
+Therefore AI was used to give more compreensive examples, to break down concepts and to provide guidance on implementation. 
