@@ -4,7 +4,7 @@
 #include <string>
 #include <utility>
 
-class Registration : public virtual MainData
+class Registration : public MainData
 {
 	private:
 		std::string participant_id_;
@@ -21,8 +21,7 @@ class Registration : public virtual MainData
 			importnatn for noexcpet to be used here
 		*/
 		Registration(Registration&&) noexcept = default;
-		Registration& operator=(const Registration&) noexcept= default;
-
+		Registration& operator=(Registration&&) noexcept = default;
 		/* 
 			Parameterised Constructor
 		*/

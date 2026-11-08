@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -std=c++20 -Wall -Wextra
+CXXFLAGS := -std=c++20
 CPPFLAGS := -IIncludes
 
 TARGET := task_assignment
@@ -10,6 +10,7 @@ SRCS := \
 	ClassSources/Event.cpp \
 	ClassSources/Participant.cpp \
 	ClassSources/Registration.cpp \
+	ClassSources/MainData.cpp \
 	Sources/Event_Utility.cpp
 
 OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))

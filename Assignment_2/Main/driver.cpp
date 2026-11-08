@@ -18,28 +18,22 @@ void displayMenu()
 }
 int main()
 {
-    // constexpr std::size_t SIZE = 20;
-    // std::array<Event, SIZE> event_arr;
-    // std::size_t event_count = parseEventFile(event_arr);   // N deduced as 20
-    // displayEvents(event_arr, event_count);
+    std::unique_ptr<MainData> events[MainData::MAX_SIZE];
+    int eventCount = 0;
 
-	/*
-		Shown 
-	*/
-	Event			event;
-	Registration 	registration;
-	Participant 	participant;
+    try
+    {
+        MainData::loadFile("./inputFiles/Event.txt", events, eventCount, Event{});
+        std::cout << "Loaded " << eventCount << " events\n\n";
+        MainData::display(events, eventCount);
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Error: " << e.what() << "\n";
+        return 1;
+    }
 
-	bool flag = true;
-	int	user_input {-1};
-	
-	//load file
-	while (flag)
-	{
-		displayMenu();
-
-	}
-	
+    return 0;
 }
 
 

@@ -73,4 +73,60 @@ void Event::setRegistrationFee(double registration_fee)
 
     registration_fee_ = registration_fee;   // double: nothing to move
 }
+/*
+	operational fucntions
+*/
+void Event::parseLine(const std::string& line)
+{
+    std::istringstream 	stream{line};
+    std::string 		fee_text;
+	std::size_t 		pos{};
 
+    if (!(std::getline(stream, event_id_, ';') &&
+          std::getline(stream, event_name_, ';') &&
+          std::getline(stream, event_type_, ';') &&
+          std::getline(stream, fee_text)))
+        throw std::runtime_error{"Invalid event record: " + line};
+
+    try
+    {
+        registration_fee_ = std::stod(fee_text, &pos);
+    }
+    catch (const std::exception&)
+    {
+        throw std::runtime_error{"Invalid registration fee: " + fee_text};
+    }
+
+    if (pos != fee_text.size() || registration_fee_ < 0)
+        throw std::runtime_error{"Invalid registration fee: " + fee_text};
+}
+
+void Event::display() const
+{
+    std::cout << *this << "\n";          // uses the friend operator<< below
+}
+
+std::string Event::getKey() const
+{
+    return event_id_;                    // what findIndex and duplicate checks compare
+}
+
+std::unique_ptr<MainData> Event::create() const
+{
+    return std::make_unique<Event>();    // a blank Event for loadFile to fill
+}
+
+double Event::operator+(const Event& other) const
+{
+    return registration_fee_ + other.registration_fee_;
+}
+
+double operator+(double total, const Event& e)
+{
+    return total + e.registration_fee_;  // friend: reads the private fee directly
+}
+
+std::ostream& operator<<(std::ostream& os, const Event& e)
+{
+    return os << e.event_id_ << " | " << e.event_name_ << " | " << e.event_type_ << " | RM" << e.registration_fee_;
+}

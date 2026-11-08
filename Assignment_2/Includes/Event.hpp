@@ -4,8 +4,13 @@
 #include <string>
 #include <stdexcept>
 #include <utility>
+#include <sstream>
 
-class Event : public virtual MainData
+/**
+ * @brief 
+ * 
+ */
+class Event : public MainData
 {
 	private:
 		std::string event_id_;
@@ -48,4 +53,24 @@ class Event : public virtual MainData
 		void setEventName(std::string event_name);
 		void setEventType(std::string event_type);
 		void setRegistrationFee(double registration_fee);
+
+		/*
+			operational functions
+		*/
+		// implied must have by MainData class
+		void parseLine(const std::string& line) override;
+		void display() const override;
+		[[nodiscard]] std::string getKey() const override;
+		[[nodiscard]] std::unique_ptr<MainData> create() const override;
+
+		// operator overloading (fee calculation)
+		[[nodiscard]] double operator+(const Event& other) const; // event + event
+		friend double operator+(double total, const Event& e); // running total + event
+
+		/*
+			friend operator for printing
+				self note : friend declaration gives a function outside the class permission to read the class’s private members
+		*/
+		friend std::ostream& operator<<(std::ostream& os, const Event& e);
+
 };

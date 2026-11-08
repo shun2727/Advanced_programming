@@ -4,7 +4,7 @@
 #include <string>
 #include <utility> // std::move
 
-class Participant : public virtual MainData
+class Participant : public MainData
 {
 	private:
 		std::string participant_id_;
@@ -41,4 +41,8 @@ class Participant : public virtual MainData
 		*/
 		void setParticipantId(std::string participant_id);
 		void setParticipantName(std::string participant_name);
+
+		/*
+			
+		*/
 };
