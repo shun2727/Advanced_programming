@@ -72,10 +72,10 @@ This following section breaks down the requirements of the project :
 ## Requirements
 
 1. **Runtime Polymorphism.** Implement virtual functions and demonstrate runtime polymorphism through base class pointers or references.
-	- 
+	- usage of virtual
 
 2. **Construct Overloading.** Provide overloaded constructors where appropriate.
-	- 
+	- default , parameterized
 
 3. **Operator Overloading.** Implement at least one meaningful operator overloading function. Examples may include registration comparison, fee calculation, participant statistics.
 	- 

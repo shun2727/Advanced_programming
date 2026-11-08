@@ -12,3 +12,7 @@ int main()
 }
 
 
+/*
+	For operator overloading : 
+	- registration comparison, fee calculation, participant statistics.
+*/

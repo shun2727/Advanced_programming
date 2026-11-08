@@ -1,24 +1,33 @@
-CFLAGS = -std=c++11 -Iincludes
-CC = c++
+CXX := g++
+CXXFLAGS := -std=c++20 -Wall -Wextra
+CPPFLAGS := -IIncludes
 
-NAME = task_assignment
-SRC = driver.cpp Event_Utility.cpp includes/Event.cpp
-OBJ = $(SRC:.cpp=.o)
+TARGET := task_assignment
+BUILD_DIR := build
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@
+SRCS := \
+	Main/driver.cpp \
+	ClassSources/Event.cpp \
+	ClassSources/Participant.cpp \
+	ClassSources/Registration.cpp \
+	Sources/Event_Utility.cpp
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
-all: $(NAME)
+all: $(TARGET)
 
-fclean: clean
-	rm -f $(NAME)
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@
+
+$(BUILD_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(BUILD_DIR) $(TARGET)
 
-re: fclean all
+fclean: clean
+
+re: clean all
 
 .PHONY: all clean fclean re
