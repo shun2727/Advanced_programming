@@ -84,7 +84,7 @@ This following section breaks down the requirements of the project :
 	- 
 
 5. **Exception Handling.** Use exception handling to manage situations such as invalid event ID, invalid participant ID, duplicate registration, file processing errors.
-	- 
+	- written inside the setter funcitons wihtin each class
 	
 6. **File Processing.** The application shall:
    1. read information from the provided text files.

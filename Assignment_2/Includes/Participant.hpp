@@ -1,9 +1,10 @@
 #pragma once
 
+#include "MainData.hpp"
 #include <string>
 #include <utility> // std::move
 
-class Participant
+class Participant : public virtual MainData
 {
 	private:
 		std::string participant_id_;

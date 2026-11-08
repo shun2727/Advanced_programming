@@ -1,8 +1,5 @@
 #include "header.hpp"
 
-#include <iomanip>
-#include <iostream>
-
 std::size_t parseEventFile(std::array<Event, SIZE>& event_arr)
 {
     std::size_t event_count{};

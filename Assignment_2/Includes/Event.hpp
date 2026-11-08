@@ -1,10 +1,11 @@
 #pragma once
 
+#include "MainData.hpp"
 #include <string>
 #include <stdexcept>
 #include <utility>
 
-class Event
+class Event : public virtual MainData
 {
 	private:
 		std::string event_id_;
