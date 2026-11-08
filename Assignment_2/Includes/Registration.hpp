@@ -3,6 +3,8 @@
 #include "MainData.hpp"
 #include <string>
 #include <utility>
+#include <iostream>
+#include <sstream>
 
 class Registration : public MainData
 {
@@ -38,4 +40,18 @@ class Registration : public MainData
 		*/
 		void setParticipantId(const std::string& participant_id);
 		void setEventId(const std::string& event_id);
+
+		/*
+			operational functions
+		*/
+		// implied must have by MainData class
+		void parseLine(const std::string& line) override;
+		void display() const override;
+		[[nodiscard]] std::string getKey() const override;
+		[[nodiscard]] std::unique_ptr<MainData> create() const override;
+
+		// operator overloading: two registrations are equal if both IDs match
+		[[nodiscard]] bool operator==(const Registration& other) const;
+
+		friend std::ostream& operator<<(std::ostream& os, const Registration& r);
 };

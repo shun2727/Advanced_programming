@@ -2,6 +2,7 @@
 
 #include "MainData.hpp"
 #include <string>
+#include <sstream>
 #include <utility> // std::move
 
 class Participant : public MainData
@@ -43,6 +44,17 @@ class Participant : public MainData
 		void setParticipantName(std::string participant_name);
 
 		/*
-			
+			operational functions
 		*/
+		// implied must have by MainData class
+		void parseLine(const std::string& line) override;
+		void display() const override;
+		[[nodiscard]] std::string getKey() const override;
+		[[nodiscard]] std::unique_ptr<MainData> create() const override;
+		
+		/*
+			friend operator for printing
+				self note : friend declaration gives a function outside the class permission to read the class’s private members
+		*/
+		friend std::ostream& operator<<(std::ostream& os, const Participant& p);
 };

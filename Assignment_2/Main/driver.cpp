@@ -19,21 +19,26 @@ void displayMenu()
 int main()
 {
     std::unique_ptr<MainData> events[MainData::MAX_SIZE];
-    int eventCount = 0;
+    std::unique_ptr<MainData> participants[MainData::MAX_SIZE];
+    std::unique_ptr<MainData> registrations[MainData::MAX_SIZE];
+    int eventCount = 0, participantCount = 0, registrationCount = 0;
 
     try
     {
         MainData::loadFile("./inputFiles/Event.txt", events, eventCount, Event{});
-        std::cout << "Loaded " << eventCount << " events\n\n";
-        MainData::display(events, eventCount);
+        MainData::loadFile("./inputFiles/Participant.txt", participants, participantCount, Participant{});
+        MainData::loadFile("./inputFiles/Registration.txt", registrations, registrationCount, Registration{});
+
+        // ... the ID-check loop from above goes here ...
+
+        std::cout << "--- Registrations (" << registrationCount << ") ---\n";
+        MainData::display(registrations, registrationCount);
     }
     catch (const std::exception& e)
     {
         std::cerr << "Error: " << e.what() << "\n";
         return 1;
     }
-
-    return 0;
 }
 
 
