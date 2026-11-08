@@ -23,10 +23,9 @@ This following section breaks down the requirements of the project :
 			E001;C++ Workshop;Workshop;150
 			E002;AI Seminar;Seminar;100
 		```
-	- Parse event information using the specified delimiters.
-	- Store event information using arrays or lists.
-	- Display available events.
-	- Store details such as event ID, event name, event type and registration fee.
+	- Parse event information using the `;` delimiter.
+	- Store event information using arrays or lists for event ID, event name, event type and registration fee.
+	- Display available events into the terminal
 
 2. Participant Management:
     - Open and read Participant.txt.
@@ -39,10 +38,9 @@ This following section breaks down the requirements of the project :
             P001;Ali Hassan
             P002;Siti Nurhaliza
 		```
-    - Parse participant information using the specified delimiters.
-    - Store participant records using arrays or lists.
-    - Display participant records.
-    - Store details such as participant ID and participant name.
+	- Parse event information using the `;` delimiter.
+    - Store participant records using arrays or lists for participant ID and participant name.
+    - Display participant records to terminal.
 
 3. Registration Management:
     - Open and read Registration.txt.
@@ -55,7 +53,7 @@ This following section breaks down the requirements of the project :
             P001;E001
             P002;E002
 		```
-    - Parse registration information using the specified delimiters.
+	- Parse event information using the `;` delimiter.
     - Store registration records using arrays or lists.
     - Allow participants to register for events.
     - Allow users to cancel existing registrations.
@@ -71,15 +69,34 @@ This following section breaks down the requirements of the project :
 
 ### Part B 
 ---
-Following are the modifications I made to incorporate modern C++ features (c++ 11 and later):
+## Requirements
 
+1. **Runtime Polymorphism.** Implement virtual functions and demonstrate runtime polymorphism through base class pointers or references.
+	- 
+
+2. **Construct Overloading.** Provide overloaded constructors where appropriate.
+	- 
+
+3. **Operator Overloading.** Implement at least one meaningful operator overloading function. Examples may include registration comparison, fee calculation, participant statistics.
+	- 
+
+4. **Friend Functions.** Implement at least one meaningful friend function.
+	- 
+
+5. **Exception Handling.** Use exception handling to manage situations such as invalid event ID, invalid participant ID, duplicate registration, file processing errors.
+	- 
+	
+6. **File Processing.** The application shall:
+   1. read information from the provided text files.
+   2. save any modifications back to files when required.
+
+7. **Modern C++**
+	1. std::array
+	
 
 ### Files - Role of each source file
 --- 
-1. driver.cpp : contains the main function
-2. header.cpp : contains functions of the main logic supporting the main funciton
-3. header.h : (althought the converntion is to use header.hpp as per subject requirments it is stored as header.h) contains the struct, function prototypes and libraries needed for the program
-4. README.md : current file with overview of the entire project
+
 
 ### Complilation guide 
 ---
@@ -89,12 +106,27 @@ Compile with the following std flags, then output to `task_assignment` as the pr
 ```
 ensure `Workers.txt` and `Tasks.txt` are located in the same folder, then run with
 ``` bash
-	./task_assignment
+	
 ```
 ## Design designs
 
 ## Reference list
+Some of the topics were covered in the advanced programming class, however for my own future reference some of those concepts will be refrered here.
 
+1. Naming conventions:
+	- Trailing underscore for membervariables and PascalCase for class naming
+	- https://google.github.io/styleguide/cppguide.html
+	- "Why not microsoft's naming guide with m_variable?"
+		- 
+
+2. Virtual for 
+	- 
+
+3. String stream 
+	- https://en.cppreference.com/cpp/io/strstream
+	
+4. stoi
+	- https://www.geeksforgeeks.org/cpp/stdstoi-function-in-cpp/
 
 ## AI usage
 These resources alone were not sufficient for me to fully grasp the concepts such a when it came to how the normal distribution and random number functions works beneath, how do i utilize span and the usage of stringstream. 
