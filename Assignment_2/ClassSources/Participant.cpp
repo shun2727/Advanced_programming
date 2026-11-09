@@ -65,7 +65,7 @@ std::string Participant::getKey() const
     return participant_id_;
 }
 
-std::unique_ptr<MainData> Participant::create() const
+std::unique_ptr<MainData> Participant::makeUniquePointer() const
 {
     return std::make_unique<Participant>();
 }

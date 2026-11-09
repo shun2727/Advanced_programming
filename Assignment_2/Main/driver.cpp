@@ -1,44 +1,88 @@
 #include "header.hpp"
 
-void displayMenu()
-{
-	std::cout << "\n---------------- MAIN MENU ----------------\n"
-			<< " 1. Display all events\n"
-			<< " 2. Display all participants\n"
-			<< " 3. Display all registrations\n"
-			<< " 4. Register participant for an event\n"
-			<< " 5. Cancel registration\n"
-			<< " 6. Report: participants for an event\n"
-			<< " 7. Report: registration summary for a participant\n"
-			<< " 8. Report: registrations & fees per event\n"
-			<< " 0. Exit\n"
-			<< "-------------------------------------------\n"
-			<< "Enter choice a number corresponding to your choice\n"
-			<<  "Number : ";
-}
 int main()
 {
-    std::unique_ptr<MainData> events[MainData::MAX_SIZE];
-    std::unique_ptr<MainData> participants[MainData::MAX_SIZE];
-    std::unique_ptr<MainData> registrations[MainData::MAX_SIZE];
-    int eventCount = 0, participantCount = 0, registrationCount = 0;
+    Data_s	data;
+	int		userInput;
 
+	/*
+		First loads and parses the data and validate the contents in the registration file.
+		Upon failure will throw an exception
+	*/
     try
     {
-        MainData::loadFile("./inputFiles/Event.txt", events, eventCount, Event{});
-        MainData::loadFile("./inputFiles/Participant.txt", participants, participantCount, Participant{});
-        MainData::loadFile("./inputFiles/Registration.txt", registrations, registrationCount, Registration{});
-
-        // ... the ID-check loop from above goes here ...
-
-        std::cout << "--- Registrations (" << registrationCount << ") ---\n";
-        MainData::display(registrations, registrationCount);
+		/*
+			Note to miss : 
+				I have already dediced this folder to store input files, 
+				however during the video briefing it is advised to not upload the files together
+				therefore please change the path of the files if needed
+		*/
+        MainData::loadFile("./inputFiles/Event.txt", data.events, data.eventCount, Event{});
+        MainData::loadFile("./inputFiles/Participant.txt", data.participants, data.participantCount, Participant{});
+        MainData::loadFile("./inputFiles/Registration.txt", data.registrations, data.registrationCount, Registration{});
+        validateRegistrations(data);
     }
     catch (const std::exception& e)
     {
         std::cerr << "Error: " << e.what() << "\n";
-        return 1;
+        return (1);
     }
+
+	/*
+		Self note:
+			- usually i'd do while (num != x) then loop
+			- but by implementing do while , the int can be initilized within the
+			 loop wihout it's condition being checked before entreing the loop
+	*/
+    do
+    {
+		/*
+			Displays the menu and registers user input
+		*/
+        displayMenu();
+        userInput = parseUserInput();
+
+        try
+        {
+            switch (userInput)
+            {
+                case 1:
+					MainData::display(data.events, data.eventCount);
+					break;
+                case 2: 
+					MainData::display(data.participants, data.participantCount);
+					break;
+                case 3:
+					MainData::display(data.registrations, data.registrationCount);
+					break;
+                case 4:
+					registerParticipant(data); 
+					break;
+                case 5: 
+					cancelRegistration(data); 
+					break;
+                case 6: 
+					rptTotalEventParticipant(data); 
+					break;
+                case 7: 
+					rptParticipantSummary(data); 
+					break;
+                case 8: 
+					rptEventAmtSum(data); 
+					break;
+                case 0:
+					std::cout << "Exiting menu....\n"; 
+					break;
+                default: 
+					std::cout << "Invalid userInput, enter a number from 0 to 8.\n";
+            }
+        }
+        catch (const std::exception& e)
+        {
+            std::cout << "Error: " << e.what() << "\n";
+        }
+
+    } while (userInput != 0);
+
+    return (0);
 }
-
-

@@ -48,7 +48,7 @@ class Registration : public MainData
 		void parseLine(const std::string& line) override;
 		void display() const override;
 		[[nodiscard]] std::string getKey() const override;
-		[[nodiscard]] std::unique_ptr<MainData> create() const override;
+		[[nodiscard]] std::unique_ptr<MainData> makeUniquePointer() const override;
 
 		// operator overloading: two registrations are equal if both IDs match
 		[[nodiscard]] bool operator==(const Registration& other) const;

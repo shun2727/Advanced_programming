@@ -50,7 +50,7 @@ class Participant : public MainData
 		void parseLine(const std::string& line) override;
 		void display() const override;
 		[[nodiscard]] std::string getKey() const override;
-		[[nodiscard]] std::unique_ptr<MainData> create() const override;
+		[[nodiscard]] std::unique_ptr<MainData> makeUniquePointer() const override;
 		
 		/*
 			friend operator for printing

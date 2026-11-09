@@ -2,7 +2,7 @@ _This project is made by 0135347 yee shun qi for the advanced programming course
 
 # Event Registration and Ticket Management System
 ## Objective
-Using oop concpets an principles develop a C++ application for an event registration and ticket management system 
+Using oop concpets and principles develop a C++ application for an event registration and ticket management system 
 
 The system is designed to :
 - Manage events, participants and registrations through text files. 
@@ -24,7 +24,7 @@ This following section breaks down the requirements of the project :
 			E002;AI Seminar;Seminar;100
 		```
 	- Parse event information using the `;` delimiter.
-	- Store event information using arrays or lists for event ID, event name, event type and registration fee.
+	- Data_s event information using arrays or lists for event ID, event name, event type and registration fee.
 	- Display available events into the terminal
 
 2. Participant Management:
@@ -39,7 +39,7 @@ This following section breaks down the requirements of the project :
             P002;Siti Nurhaliza
 		```
 	- Parse event information using the `;` delimiter.
-    - Store participant records using arrays or lists for participant ID and participant name.
+    - Data_s participant records using arrays or lists for participant ID and participant name.
     - Display participant records to terminal.
 
 3. Registration Management:
@@ -54,7 +54,7 @@ This following section breaks down the requirements of the project :
             P002;E002
 		```
 	- Parse event information using the `;` delimiter.
-    - Store registration records using arrays or lists.
+    - Data_s registration records using arrays or lists.
     - Allow participants to register for events.
     - Allow users to cancel existing registrations.
     - Prevent duplicate registrations.
@@ -70,6 +70,7 @@ This following section breaks down the requirements of the project :
 ### Part B 
 ---
 ## Requirements
+The following lists requirements for part B as well as my reference and notes on where these concepts can be found thorught my program implementation : 
 
 1. **Runtime Polymorphism.** Implement virtual functions and demonstrate runtime polymorphism through base class pointers or references.
 	- usage of virtual
@@ -78,10 +79,10 @@ This following section breaks down the requirements of the project :
 	- default , parameterized
 
 3. **Operator Overloading.** Implement at least one meaningful operator overloading function. Examples may include registration comparison, fee calculation, participant statistics.
-	- 
+	-  i u
 
 4. **Friend Functions.** Implement at least one meaningful friend function.
-	- 
+	- iu
 
 5. **Exception Handling.** Use exception handling to manage situations such as invalid event ID, invalid participant ID, duplicate registration, file processing errors.
 	- written inside the setter funcitons wihtin each class
@@ -96,28 +97,39 @@ This following section breaks down the requirements of the project :
 
 ### Files - Role of each source file
 --- 
+#### File structure :
 
+#### File roles : 
 
 ### Complilation guide 
 ---
-Compile with the following std flags, then output to `task_assignment` as the program name
-```bash
-	g++ -std=c++20 driver.cpp header.cpp -o task_assignment
-```
-ensure `Workers.txt` and `Tasks.txt` are located in the same folder, then run with
-``` bash
-	
-```
-## Design designs
+Due to the volume of source files, a Makefile has been created to compile into a executionable file.
 
-## Reference list
+First ensure `Event.txt` `Participant.txt` and `Registration.txt` are located within the `/inputFiles` . Otherwise change the folder location in `Main/driver.cpp` in this seciton of the code within `main()`
+
+```c++
+MainData::loadFile("./inputFiles/Event.txt", data.events, data.eventCount, Event{});
+MainData::loadFile("./inputFiles/Participant.txt", data.participants, data.participantCount, Participant{});
+MainData::loadFile("./inputFiles/Registration.txt", data.registrations, data.registrationCount, Registration{});        
+```
+
+Then run : 
+```bash
+	make
+```
+You may check the `PHONY.` values for other capabilities :
+
+
+These are implemented for me to use during development in the case of recompilation and object file deletion. 
+
+
+## Design (Class Diagram)
+
+
+## Reference list [IEEE referencing]
 Some of the topics were covered in the advanced programming class, however for my own future reference some of those concepts will be refrered here.
 
-1. Naming conventions:
-	- Trailing underscore for membervariables and PascalCase for class naming
-	- https://google.github.io/styleguide/cppguide.html
-	- "Why not microsoft's naming guide with m_variable?"
-		- 
+1. Naming conventions
 
 2. Virtual for 
 	- 
@@ -125,8 +137,13 @@ Some of the topics were covered in the advanced programming class, however for m
 3. String stream 
 	- https://en.cppreference.com/cpp/io/strstream
 	
-4. stoi
+4. stoi / stod
 	- https://www.geeksforgeeks.org/cpp/stdstoi-function-in-cpp/
+
+5. Makefile
+
+
+
 
 ## AI usage
 These resources alone were not sufficient for me to fully grasp the concepts such a when it came to how the normal distribution and random number functions works beneath, how do i utilize span and the usage of stringstream. 

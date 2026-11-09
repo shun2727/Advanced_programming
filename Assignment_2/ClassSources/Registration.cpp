@@ -52,13 +52,13 @@ void Registration::display() const
     std::cout << *this << "\n";
 }
 
-// the key is BOTH IDs, so findIndex rejects a repeated pair = duplicate registration
+// the key is BOTH IDs, so getIndexFromKey rejects a repeated pair = duplicate registration
 std::string Registration::getKey() const
 {
     return participant_id_ + ";" + event_id_;
 }
 
-std::unique_ptr<MainData> Registration::create() const
+std::unique_ptr<MainData> Registration::makeUniquePointer() const
 {
     return std::make_unique<Registration>();
 }

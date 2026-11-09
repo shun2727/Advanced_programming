@@ -5,20 +5,45 @@
 #include "Registration.hpp"
 #include "MainData.hpp"
 
-#include <array>      // std::array
-#include <cstddef>    // std::size_t
-#include <fstream>    // std::ifstream , atod
-#include <sstream>    // std::istringstream
-#include <stdexcept>  // std::runtime_error
-#include <string>     // std::string, std::stod
-#include <utility>    // std::move
-#include <iomanip>	//setprecision()
-#include <iostream>
+#include <algorithm>  // transform
+#include <cctype>     // toupper
+#include <iomanip>    // setprecision, setw
+#include <iostream>  // cin, cout, cerr
+#include <limits>     // numeric_limits
+#include <memory>     // unique_ptr
+#include <string>    // string
 
-/*
-	EventUtility.cpp
-*/
-const std::size_t SIZE = 20;
-std::size_t parseEventFile(std::array<Event, SIZE>& event_arr);
-void displayEvents(const std::array<Event, SIZE>& event_arr, std::size_t event_count);
+struct Data_s
+{
+	/*
+		- initializes an array of pointer objects
+		- initilized from stack with a fixed size defined in MainData struct
+		- the assumption is that data size will not exceed 50 inputs
+	*/
+    std::unique_ptr<MainData> events[MainData::MAX_SIZE];
+    std::unique_ptr<MainData> participants[MainData::MAX_SIZE];
+    std::unique_ptr<MainData> registrations[MainData::MAX_SIZE];
+    int eventCount{};
+	int participantCount {};
+	int registrationCount {};
+};
 
+// MenuFeatures.cpp
+int         parseUserInput();
+std::string readId(const std::string& prompt);
+void        displayMenu();
+
+// HelperFunctions.cpp
+Event*        getEvent(Data_s& data_struct, const std::string& id);
+Participant*  getParticipant(Data_s& data_struct, const std::string& id);
+Registration* registrationAt(Data_s& data_struct, int i);
+void          validateRegistrations(Data_s& data_struct);
+
+// ManageRegistraions.cpp
+void registerParticipant(Data_s& data_struct);
+void cancelRegistration(Data_s& data_struct);
+
+// GenerateReport.cpp
+void rptTotalEventParticipant(Data_s& data_struct);
+void rptParticipantSummary(Data_s& data_struct);
+void rptEventAmtSum(Data_s& data_struct);

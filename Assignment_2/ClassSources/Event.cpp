@@ -76,6 +76,22 @@ void Event::setRegistrationFee(double registration_fee)
 /*
 	operational fucntions
 */
+
+/**
+ * @brief creates a unqiue pointer based on the object type
+ * 
+ * @return std::unique_ptr<MainData> 
+ */
+std::unique_ptr<MainData> Event::makeUniquePointer() const
+{
+    return std::make_unique<Event>();
+}
+
+/**
+ * @brief Deconstructs the line by delimeter ; and assign the values to the object's feild
+ * 
+ * @param line 
+ */
 void Event::parseLine(const std::string& line)
 {
     std::istringstream 	stream{line};
@@ -94,38 +110,62 @@ void Event::parseLine(const std::string& line)
     }
     catch (const std::exception&)
     {
-        throw std::runtime_error{"Invalid registration fee: " + fee_text};
+        throw std::runtime_error{"Invalid registration fee"};
     }
 
     if (pos != fee_text.size() || registration_fee_ < 0)
-        throw std::runtime_error{"Invalid registration fee: " + fee_text};
+        throw std::runtime_error{"Invalid registration fee"};
 }
 
-void Event::display() const
-{
-    std::cout << *this << "\n";          // uses the friend operator<< below
-}
-
+/**
+ * @brief returns the event_id based on the event object
+ * 
+ * @return std::string 
+ */
 std::string Event::getKey() const
 {
-    return event_id_;                    // what findIndex and duplicate checks compare
+    return event_id_;
 }
 
-std::unique_ptr<MainData> Event::create() const
-{
-    return std::make_unique<Event>();    // a blank Event for loadFile to fill
-}
-
+/**
+ * @brief overloaded + operator to calculate registration fee just by passing event object
+ * 
+ * @param other 
+ * @return double 
+ */
 double Event::operator+(const Event& other) const
 {
     return registration_fee_ + other.registration_fee_;
 }
 
+/**
+ * @brief overloaded + operator to calculate total registration fee just by passing event object
+ * 
+ * @param total 
+ * @param e 
+ * @return double 
+ */
 double operator+(double total, const Event& e)
 {
-    return total + e.registration_fee_;  // friend: reads the private fee directly
+    return total + e.registration_fee_;
 }
 
+/**
+ * @brief displayes using te overloaded << operator
+ * 
+ */
+void Event::display() const
+{
+    std::cout << *this << "\n";
+}
+
+/**
+ * @brief overload the << operator belonging to the output stream
+ * 
+ * @param os 
+ * @param e 
+ * @return std::ostream& 
+ */
 std::ostream& operator<<(std::ostream& os, const Event& e)
 {
     return os << e.event_id_ << " | " << e.event_name_ << " | " << e.event_type_ << " | RM" << e.registration_fee_;

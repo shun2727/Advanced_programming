@@ -11,7 +11,10 @@ SRCS := \
 	ClassSources/Participant.cpp \
 	ClassSources/Registration.cpp \
 	ClassSources/MainData.cpp \
-	Sources/Event_Utility.cpp
+	Sources/GenerateReport.cpp \
+	Sources/HelperFunctions.cpp \
+	Sources/ManageRegistraions.cpp \
+	Sources/MenuFeatures.cpp
 
 OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
