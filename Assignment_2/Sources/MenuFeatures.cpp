@@ -17,7 +17,7 @@ void displayMenu()
               << " 8. Report: registrations & fees per event\n"
               << " 0. Exit\n"
               << "-------------------------------------------\n"
-              << "Enter userInput a number corresponding to your userInput\n"
+              << "Enter a number corresponding to the menu options \n"
               << "Number : ";
 }
 
