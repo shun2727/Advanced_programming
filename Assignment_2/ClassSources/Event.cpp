@@ -124,7 +124,7 @@ void Event::parseLine(const std::string& line)
  */
 std::string Event::getKey() const
 {
-    return event_id_;
+	return event_id_;
 }
 
 /**
@@ -135,7 +135,7 @@ std::string Event::getKey() const
  */
 double Event::operator+(const Event& other) const
 {
-    return registration_fee_ + other.registration_fee_;
+	return registration_fee_ + other.registration_fee_;
 }
 
 /**
@@ -147,7 +147,7 @@ double Event::operator+(const Event& other) const
  */
 double operator+(double total, const Event& e)
 {
-    return total + e.registration_fee_;
+	return total + e.registration_fee_;
 }
 
 /**
@@ -156,7 +156,21 @@ double operator+(double total, const Event& e)
  */
 void Event::display() const
 {
-    std::cout << *this << "\n";
+	std::cout << *this << "\n";
+}
+
+/**
+ * @brief prints the header for event file
+ * 
+ */
+void Event::printHeader() const
+{
+	std::cout << std::left
+			<< std::setw(8)  << "ID"         << " | "
+			<< std::setw(30) << "Event Name" << " | "
+			<< std::setw(14) << "Type"       << " | "
+			<< std::setw(10) << "Fee (RM)"   << "\n"
+			<< std::string(71, '-') << "\n";
 }
 
 /**
@@ -168,5 +182,9 @@ void Event::display() const
  */
 std::ostream& operator<<(std::ostream& os, const Event& e)
 {
-    return os << e.event_id_ << " | " << e.event_name_ << " | " << e.event_type_ << " | RM" << e.registration_fee_;
+	return os << std::left
+			<< std::setw(8)  << e.event_id_   << " | "
+			<< std::setw(30) << e.event_name_ << " | "
+			<< std::setw(14) << e.event_type_ << " | "
+			<< std::setw(10) << e.registration_fee_;
 }

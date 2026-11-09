@@ -47,6 +47,14 @@ void Registration::parseLine(const std::string& line)
         throw std::runtime_error{"Registration IDs cannot be empty: " + line};
 }
 
+void Registration::printHeader() const
+{
+    std::cout << std::left
+              << std::setw(8) << "Part ID" << " | "
+              << std::setw(8) << "Event ID" << "\n"
+              << std::string(19, '-') << "\n";
+}
+
 void Registration::display() const
 {
     std::cout << *this << "\n";
@@ -70,5 +78,7 @@ bool Registration::operator==(const Registration& other) const
 
 std::ostream& operator<<(std::ostream& os, const Registration& r)
 {
-    return os << r.participant_id_ << " | " << r.event_id_;
+	return os << std::left
+			<< std::setw(8) << r.participant_id_ << " | "
+			<< std::setw(8) << r.event_id_;
 }

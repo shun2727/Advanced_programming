@@ -7,19 +7,24 @@
  */
 void registerParticipant(Data_s& data_struct)
 {
+	showParticipants(data_struct);
+    std::cout << "\n";
     std::string pid = readId("Participant ID: ");
+
+	showEvents(data_struct);
+    std::cout << "\n";
     std::string eid = readId("Event ID: ");
 
     Participant* p = getParticipant(data_struct, pid);
     if (p == nullptr)
-        throw std::runtime_error{"Unknown participant: " + pid};
+        throw std::runtime_error{"Invalid participant: " + pid};
 
     Event* e = getEvent(data_struct, eid);
     if (e == nullptr)
-        throw std::runtime_error{"Unknown event: " + eid};
+        throw std::runtime_error{"Invalid event: " + eid};
 
-    // addArrEntry throws "Duplicate record" if this pair already exists
-    MainData::addArrEntry(data_struct.registrations, data_struct.registrationCount, std::make_unique<Registration>(pid, eid));
+    // addRegistraionEntry throws "Duplicate record" if this pair already exists
+    MainData::addRegistraionEntry(data_struct.registrations, data_struct.registrationCount, std::make_unique<Registration>(pid, eid));
 
     std::cout << p->getParticipantName() << " registered for " << e->getEventName() << ". Fee payable: RM" << e->getRegistrationFee() << "\n";
 }
@@ -31,6 +36,12 @@ void registerParticipant(Data_s& data_struct)
  */
 void cancelRegistration(Data_s& data_struct)
 {
+	if (data_struct.registrationCount == 0)
+    	throw std::runtime_error{"There are no registrations to cancel"};
+
+    showRegistrations(data_struct);
+    std::cout << "\n";
+
     std::string pid = readId("Participant ID: ");
     std::string eid = readId("Event ID: ");
 

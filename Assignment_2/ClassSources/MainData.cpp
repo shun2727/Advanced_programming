@@ -72,7 +72,8 @@ void MainData::display(const std::unique_ptr<MainData> arr[], int count)
         std::cout << "record is empty \n";
         return;
     }
-	//arr[0]->display_header();
+
+	arr[0]->printHeader();
 	/*
 		display() virtual funciton will call the appropraite display based on the class object
 	*/
@@ -105,7 +106,7 @@ int MainData::getIndexFromKey(const std::unique_ptr<MainData> arr[], int count, 
  * @param count 
  * @param record 
  */
-void MainData::addArrEntry(std::unique_ptr<MainData> arr[], int& count, std::unique_ptr<MainData> object)
+void MainData::addRegistraionEntry(std::unique_ptr<MainData> arr[], int& count, std::unique_ptr<MainData> object)
 {
 	/*
 		getKey() virtual funciton will call based on the class object to get the keyvalue

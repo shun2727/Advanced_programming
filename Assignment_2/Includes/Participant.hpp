@@ -1,8 +1,13 @@
 #pragma once
 
 #include "MainData.hpp"
-#include <string>
-#include <sstream>
+
+#include <iomanip> // std::left, std::setw
+#include <iostream> // std::cout, std::ostream
+#include <memory> // std::make_unique, std::unique_ptr
+#include <sstream> // std::istringstream
+#include <stdexcept> // std::runtime_error
+#include <string> // std::string
 #include <utility> // std::move
 
 class Participant : public MainData
@@ -47,11 +52,12 @@ class Participant : public MainData
 			operational functions
 		*/
 		// implied must have by MainData class
+		void printHeader() const override;
 		void parseLine(const std::string& line) override;
 		void display() const override;
 		[[nodiscard]] std::string getKey() const override;
 		[[nodiscard]] std::unique_ptr<MainData> makeUniquePointer() const override;
-		
+
 		/*
 			friend operator for printing
 				self note : friend declaration gives a function outside the class permission to read the class’s private members

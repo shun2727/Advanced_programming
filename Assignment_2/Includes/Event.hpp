@@ -1,10 +1,14 @@
 #pragma once
 
 #include "MainData.hpp"
-#include <string>
-#include <stdexcept>
-#include <utility>
-#include <sstream>
+
+#include <iomanip> // std::left, std::setw
+#include <iostream> // std::cout, std::ostream
+#include <memory> // std::make_unique, std::unique_ptr
+#include <sstream> // std::istringstream
+#include <stdexcept> // std::invalid_argument, std::runtime_error
+#include <string> // std::string, std::stod
+#include <utility> // std::move
 
 /**
  * @brief 
@@ -58,6 +62,7 @@ class Event : public MainData
 			operational functions
 		*/
 		// implied must have by MainData class
+		void printHeader() const override;
 		void parseLine(const std::string& line) override;
 		void display() const override;
 		[[nodiscard]] std::string getKey() const override;

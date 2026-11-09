@@ -5,13 +5,12 @@
 #include "Registration.hpp"
 #include "MainData.hpp"
 
-#include <algorithm>  // transform
-#include <cctype>     // toupper
-#include <iomanip>    // setprecision, setw
-#include <iostream>  // cin, cout, cerr
-#include <limits>     // numeric_limits
-#include <memory>     // unique_ptr
-#include <string>    // string
+#include <cctype> // std::toupper
+#include <iomanip> // std::left, std::setw
+#include <iostream> // std::cin, std::cout, std::cerr
+#include <memory> // std::unique_ptr
+#include <stdexcept> // std::runtime_error
+#include <string> // std::string, std::getline, std::stoi
 
 struct Data_s
 {
@@ -32,6 +31,9 @@ struct Data_s
 int         parseUserInput();
 std::string readId(const std::string& prompt);
 void        displayMenu();
+void		showEvents(Data_s& data_struct);
+void		showParticipants(Data_s& data_struct);
+void		showRegistrations(Data_s& data_struct);
 
 // HelperFunctions.cpp
 Event*        getEvent(Data_s& data_struct, const std::string& id);

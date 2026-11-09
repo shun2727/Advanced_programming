@@ -11,6 +11,7 @@ The system is designed to :
 ## System Overview
 ### Part A
 ---
+#### Requirements : 
 This following section breaks down the requirements of the project : 
 1. Event Management : 
 	- Open and read Event.txt.
@@ -98,8 +99,39 @@ The following lists requirements for part B as well as my reference and notes on
 ### Files - Role of each source file
 --- 
 #### File structure :
+Note :
+	- Event.txt , Participant.txt , Pegistration.txt will not be submitted along this zip file but during the development of the project it was placed in that folder for uniformness
+
+```text
+	Assignment_2/
+	├── Includes/
+	│   ├── MainData.hpp
+	│   ├── Event.hpp
+	│   ├── Participant.hpp
+	│   ├── Registration.hpp
+	│   └── header.hpp
+	├── ClassSources/
+	│   ├── MainData.cpp
+	│   ├── Event.cpp
+	│   ├── Participant.cpp
+	│   └── Registration.cpp
+	├── Sources/
+	│   ├── MenuFeatures.cpp
+	│   ├── HelperFunctions.cpp
+	│   ├── ManageRegistraions.cpp
+	│   └── GenerateReport.cpp
+	├── Main/
+	│   └── driver.cpp
+	├── inputFiles/
+	│   ├── Event.txt
+	│   ├── Participant.txt
+	│   └── Registration.txt
+	├── Makefile
+	└── README.md
+```
 
 #### File roles : 
+
 
 ### Complilation guide 
 ---

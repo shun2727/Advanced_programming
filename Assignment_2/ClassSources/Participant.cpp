@@ -72,5 +72,15 @@ std::unique_ptr<MainData> Participant::makeUniquePointer() const
 
 std::ostream& operator<<(std::ostream& os, const Participant& p)
 {
-    return os << p.participant_id_ << " | " << p.participant_name_;
+	return os << std::left
+			<< std::setw(8)  << p.participant_id_ << " | "
+			<< std::setw(30) << p.participant_name_;
+}
+
+void Participant::printHeader() const
+{
+    std::cout << std::left
+              << std::setw(8)  << "ID" << " | "
+              << std::setw(30) << "Name" << "\n"
+              << std::string(41, '-') << "\n";
 }
