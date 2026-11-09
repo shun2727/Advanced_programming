@@ -2,7 +2,7 @@ CXX := g++
 CXXFLAGS := -std=c++20
 CPPFLAGS := -IIncludes
 
-TARGET := task_assignment
+TARGET := event_management_system
 BUILD_DIR := build
 
 SRCS := \

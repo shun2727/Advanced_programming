@@ -12,7 +12,8 @@ The system is designed to :
 ### Part A
 ---
 #### Requirements : 
-This following section breaks down the requirements of the project : 
+This following section breaks down the requirements of the project and my implementation of it: 
+
 1. Event Management : 
 	- Open and read Event.txt.
 		- Event.txt format :
@@ -132,17 +133,47 @@ Note :
 
 #### File roles : 
 
+1. Includes :
+   1. MainData.hpp :
+   2. Event.hpp :
+   3. Participant.hpp :
+   4. Registration.hpp :
+   5. header.hpp :
+
+2. ClassSources :
+   1. MainData.cpp :
+   2. Event.cpp :
+   3. Participant.cpp :
+   4. Registration.cpp :
+
+3. Sources :
+   1. MenuFeatures.cpp :
+   2. HelperFunctions.cpp :
+   3. ManageRegistraions.cpp :
+   4. GenerateReport.cpp :
+
+4. Main :
+   1. driver.cpp :
+
+5. inputFiles :
+   1. Event.txt :
+   2. Participant.txt :
+   3. Registration.txt :
+
+6. Root files :
+   1. Makefile :
+   2. README.md :
 
 ### Complilation guide 
 ---
-Due to the volume of source files, a Makefile has been created to compile into a executionable file.
+Due to the volume of source files (.cpp), a Makefile has been created to compile into a executionable file.
 
 First ensure `Event.txt` `Participant.txt` and `Registration.txt` are located within the `/inputFiles` . Otherwise change the folder location in `Main/driver.cpp` in this seciton of the code within `main()`
 
 ```c++
-MainData::loadFile("./inputFiles/Event.txt", data.events, data.eventCount, Event{});
-MainData::loadFile("./inputFiles/Participant.txt", data.participants, data.participantCount, Participant{});
-MainData::loadFile("./inputFiles/Registration.txt", data.registrations, data.registrationCount, Registration{});        
+	MainData::loadFile("./inputFiles/Event.txt", data.events, data.eventCount, Event{});
+	MainData::loadFile("./inputFiles/Participant.txt", data.participants, data.participantCount, Participant{});
+	MainData::loadFile("./inputFiles/Registration.txt", data.registrations, data.registrationCount, Registration{});        
 ```
 
 Then run : 
@@ -153,7 +184,9 @@ You may check the `PHONY.` values for other capabilities :
 
 
 These are implemented for me to use during development in the case of recompilation and object file deletion. 
-
+```bash
+	./event_management_system
+```
 
 ## Design (Class Diagram)
 
@@ -161,25 +194,15 @@ These are implemented for me to use during development in the case of recompilat
 ## Reference list [IEEE referencing]
 Some of the topics were covered in the advanced programming class, however for my own future reference some of those concepts will be refrered here.
 
-1. Naming conventions
-
-2. Virtual for 
-	- 
-
-3. String stream 
-	- https://en.cppreference.com/cpp/io/strstream
-	
-4. stoi / stod
-	- https://www.geeksforgeeks.org/cpp/stdstoi-function-in-cpp/
-
-5. Makefile
 
 
 
 
 ## AI usage
-These resources alone were not sufficient for me to fully grasp the concepts such a when it came to how the normal distribution and random number functions works beneath, how do i utilize span and the usage of stringstream. 
+- Menu display : AI was more heavily used to create the formatting for menu outputs and display formatting for all three objects after it was stored in the array (especially for ones involving setw() as it required more precise spacing to ensure the data shows tidily).
+- exception error messages : AI assistance was used to create the error messages based on the caught exceptions.
+- README : AI was used in README to help with reference formatting, based on the IEEE referencing and formatting for the file tree.
+- Classess : Reduntant duplicaiton of implementation or just prototyping for class member funcitons such as accessors , mutators, destructors and copy constructors , move constructors were assisted by ai to speed up the process but base logic for one class was written fully before using this approach. 
+- General guidance : It was used to guide me through concepts i was less familiar with which includes explanation and demonstrations of virtual funciton implementations, try catch exceptions and its error messages, unique_pointers and the logic of std::move(). 
 
-Therefore AI was used to give more compreensive examples, to break down concepts and to provide guidance on implementation. 
-
-If there are doubts on the progress on the assignment, view the git logs from my github page : https://github.com/shun2727/Advanced_programming.git
+If there are doubts on the progress or development on the assignment, view the git logs from my github page : https://github.com/shun2727/Advanced_programming.git

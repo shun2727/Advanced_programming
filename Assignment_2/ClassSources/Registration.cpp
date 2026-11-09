@@ -3,6 +3,7 @@
 Registration::Registration(const std::string& participant_id, const std::string& event_id)
     : participant_id_{std::move(participant_id)}, event_id_{std::move(event_id)}
 {
+
 }
 
 /*
@@ -33,8 +34,16 @@ void Registration::setEventId(const std::string& event_id)
 
 /*
 	operational functions
+	- although some functions behave similarly with the accessors,
+	 due to the fact that its a requirement by the base function because it is an
+	  abstract class, functions like getKey() are used through the base class
 */
 
+/**
+ * @brief Deconstructs the line by delimiter ; and assigns the values to the registration's fields
+ *
+ * @param line
+ */
 void Registration::parseLine(const std::string& line)
 {
     std::istringstream stream{line};
@@ -47,6 +56,10 @@ void Registration::parseLine(const std::string& line)
         throw std::runtime_error{"Registration IDs cannot be empty: " + line};
 }
 
+/**
+ * @brief prints the header for registration
+ *
+ */
 void Registration::printHeader() const
 {
     std::cout << std::left
@@ -55,27 +68,56 @@ void Registration::printHeader() const
               << std::string(19, '-') << "\n";
 }
 
+/**
+ * @brief displays using the overloaded << operator
+ *
+ */
 void Registration::display() const
 {
     std::cout << *this << "\n";
 }
 
-// the key is BOTH IDs, so getIndexFromKey rejects a repeated pair = duplicate registration
+/**
+ * @brief provides the participant and event IDs as the registration's key
+ *
+ * The key contains both IDs so getIndexFromKey() can reject a repeated pair as a duplicate registration.
+ *
+ * @return std::string
+ */
 std::string Registration::getKey() const
 {
     return participant_id_ + ";" + event_id_;
 }
 
+/**
+ * @brief creates a unique pointer based on the object type
+ *
+ * @return std::unique_ptr<MainData>
+ */
 std::unique_ptr<MainData> Registration::makeUniquePointer() const
 {
     return std::make_unique<Registration>();
 }
 
+/**
+ * @brief checks whether two registrations have the same participant ID and event ID
+ *
+ * @param other
+ * @return true if both IDs match
+ * @return false if either ID does not match
+ */
 bool Registration::operator==(const Registration& other) const
 {
     return participant_id_ == other.participant_id_ && event_id_ == other.event_id_;
 }
 
+/**
+ * @brief overloads the << operator belonging to the output stream
+ *
+ * @param os
+ * @param r
+ * @return std::ostream&
+ */
 std::ostream& operator<<(std::ostream& os, const Registration& r)
 {
 	return os << std::left

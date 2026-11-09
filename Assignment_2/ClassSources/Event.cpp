@@ -36,45 +36,29 @@ double Event::getRegistrationFee() const
 */
 void Event::setEventId(std::string event_id)
 {
-    if (event_id.empty())
-    {
-        throw std::invalid_argument("Event ID cannot be empty.");
-    }
-
     event_id_ = std::move(event_id);
 }
 
 void Event::setEventName(std::string event_name)
 {
-    if (event_name.empty())
-    {
-        throw std::invalid_argument("Event name cannot be empty.");
-    }
-
     event_name_ = std::move(event_name);
 }
 
 void Event::setEventType(std::string event_type)
 {
-    if (event_type.empty())
-    {
-        throw std::invalid_argument("Event type cannot be empty.");
-    }
-
     event_type_ = std::move(event_type);
 }
 
 void Event::setRegistrationFee(double registration_fee)
 {
-    if (registration_fee < 0)
-    {
-        throw std::invalid_argument("Registration fee cannot be negative.");
-    }
-
     registration_fee_ = registration_fee;   // double: nothing to move
 }
 /*
 	operational fucntions
+	- although some functions behave similarly with the accessors,
+	 due to the fact that its a requirement by the base funciton due to it being an
+	  abstract class and participant is a virtual class, funciton like getKey() is
+	    used based on the base class
 */
 
 /**
@@ -88,7 +72,7 @@ std::unique_ptr<MainData> Event::makeUniquePointer() const
 }
 
 /**
- * @brief Deconstructs the line by delimeter ; and assign the values to the object's feild
+ * @brief Deconstructs the line by delimeter ; and assign the values to the event's feild
  * 
  * @param line 
  */
@@ -151,7 +135,7 @@ double operator+(double total, const Event& e)
 }
 
 /**
- * @brief displayes using te overloaded << operator
+ * @brief displayes using the overloaded << operator
  * 
  */
 void Event::display() const
