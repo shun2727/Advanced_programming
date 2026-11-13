@@ -11,15 +11,9 @@ int main()
 	*/
     try
     {
-		/*
-			Note to miss : 
-				I have already dediced this folder to store input files, 
-				however during the video briefing it is advised to not upload the files together
-				therefore please change the path of the files if needed
-		*/
-        MainData::loadFile("./inputFiles/Event.txt", data.events, data.eventCount, Event{});
-        MainData::loadFile("./inputFiles/Participant.txt", data.participants, data.participantCount, Participant{});
-        MainData::loadFile("./inputFiles/Registration.txt", data.registrations, data.registrationCount, Registration{});
+        MainData::loadFile("./Event.txt", data.events, data.eventCount, Event{});
+        MainData::loadFile("./Participant.txt", data.participants, data.participantCount, Participant{});
+        MainData::loadFile("./Registration.txt", data.registrations, data.registrationCount, Registration{});        
         validateRegistrations(data);
     }
     catch (const std::exception& e)

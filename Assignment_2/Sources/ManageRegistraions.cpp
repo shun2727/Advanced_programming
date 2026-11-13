@@ -26,9 +26,9 @@ void registerParticipant(Data_s& data_struct)
     // addRegistraionEntry throws "Duplicate record" if this pair already exists
     MainData::addRegistraionEntry(data_struct.registrations, data_struct.registrationCount, std::make_unique<Registration>(pid, eid));
 
-    std::ofstream registration_file{"./inputFiles/Registration.txt", std::ios::trunc};
+    std::ofstream registration_file{"./Registration.txt", std::ios::trunc};
     if (!registration_file)
-        throw std::runtime_error{"Cannot open file: ./inputFiles/Registration.txt"};
+        throw std::runtime_error{"Cannot open file: ./Registration.txt"};
 
     for (int i = 0; i < data_struct.registrationCount; ++i)
     {
@@ -63,9 +63,9 @@ void cancelRegistration(Data_s& data_struct)
 
     MainData::removeEntry(data_struct.registrations, data_struct.registrationCount, i);
 
-    std::ofstream registration_file{"./inputFiles/Registration.txt", std::ios::trunc};
+    std::ofstream registration_file{"./Registration.txt", std::ios::trunc};
     if (!registration_file)
-        throw std::runtime_error{"Cannot open file: ./inputFiles/Registration.txt"};
+        throw std::runtime_error{"Cannot open file: ./Registration.txt"};
 
     for (int i = 0; i < data_struct.registrationCount; ++i)
     {

@@ -1,0 +1,15 @@
+E001;C++ Workshop;Workshop;150
+E002;AI Seminar;Seminar;100
+E003;Game Competition;Competition;200
+E004;Cybersecurity Workshop;Workshop;180
+E005;Cloud Computing Seminar;Seminar;120
+E006;Mobile App Competition;Competition;250
+E007;Data Analytics Workshop;Workshop;160
+E008;Entrepreneurship Seminar;Seminar;90
+E009;Robotics Competition;Competition;300
+E010;Web Development Workshop;Workshop;140
+E011;Digital Marketing Seminar;Seminar;110
+E012;Hackathon Competition;Competition;280
+E013;UIUX Design Workshop;Workshop;130
+E014;Green Technology Seminar;Seminar;95
+E015;Machine Learning Workshop;Workshop;220

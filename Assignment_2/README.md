@@ -115,8 +115,6 @@ This following section breaks down the requirements of the project:
 ### Files - Role of each source file
 --- 
 #### File structure :
-Note :
-	- Event.txt , Participant.txt , Pegistration.txt will not be submitted along this zip file but during the development of the project it was placed in that folder for uniformness
 
 ```text
 	Assignment_2/
@@ -138,12 +136,12 @@ Note :
 	│   └── GenerateReport.cpp
 	├── Main/
 	│   └── driver.cpp
-	├── inputFiles/
-	│   ├── Event.txt
-	│   ├── Participant.txt
-	│   └── Registration.txt
+	├── Event.txt
+	├── Participant.txt
+	├── Registration.txt
 	├── Makefile
-	└── README.md
+	├── README.md
+	└── ClassDiagramBasic.png
 ```
 
 #### File roles : 
@@ -179,12 +177,12 @@ Note :
 ---
 Due to the volume of source files (.cpp), a Makefile has been created to compile into a executionable file.
 
-First ensure `Event.txt` `Participant.txt` and `Registration.txt` are located within the `/inputFiles` . Otherwise change the folder location in `Main/driver.cpp` in this seciton of the code within `main()`
+The input files should be placed in the project root folder alongside `README.md`.
 
 ```c++
-	MainData::loadFile("./inputFiles/Event.txt", data.events, data.eventCount, Event{});
-	MainData::loadFile("./inputFiles/Participant.txt", data.participants, data.participantCount, Participant{});
-	MainData::loadFile("./inputFiles/Registration.txt", data.registrations, data.registrationCount, Registration{});        
+	MainData::loadFile("./Event.txt", data.events, data.eventCount, Event{});
+	MainData::loadFile("./Participant.txt", data.participants, data.participantCount, Participant{});
+	MainData::loadFile("./Registration.txt", data.registrations, data.registrationCount, Registration{});        
 ```
 
 Then run : 
