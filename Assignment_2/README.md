@@ -96,6 +96,7 @@ This following section breaks down the requirements of the project:
 
 6. **File Processing:** The application shall read information from the provided text files and save modifications back to files when required.
    - `MainData::loadFile()` reads and parses the event, participant and registration files.
+   - Modification will be made to the registration file if cancellations and registrations are made
 
 7. **Modern C++:** Use modern C++ features.
 	Following are some examples of the feature in my code : 

@@ -1,7 +1,7 @@
 #include "header.hpp"
 
 /**
- * @brief Regsiters participant for event for option 4
+ * @brief Regsiters participant for event for option , saves and removes from file according to teh actions
  * 
  * @param data_struct gets passed the struct
  */
@@ -25,6 +25,18 @@ void registerParticipant(Data_s& data_struct)
 
     // addRegistraionEntry throws "Duplicate record" if this pair already exists
     MainData::addRegistraionEntry(data_struct.registrations, data_struct.registrationCount, std::make_unique<Registration>(pid, eid));
+
+    std::ofstream registration_file{"./inputFiles/Registration.txt", std::ios::trunc};
+    if (!registration_file)
+        throw std::runtime_error{"Cannot open file: ./inputFiles/Registration.txt"};
+
+    for (int i = 0; i < data_struct.registrationCount; ++i)
+    {
+        Registration* reg = static_cast<Registration*>(data_struct.registrations[i].get());
+        registration_file << reg->getParticipantId() << ';' << reg->getEventId() << '\n';
+    }
+
+    registration_file.flush();
 
     std::cout << p->getParticipantName() << " registered for " << e->getEventName() << ". Fee payable: RM" << e->getRegistrationFee() << "\n";
 }
@@ -50,6 +62,19 @@ void cancelRegistration(Data_s& data_struct)
         throw std::runtime_error{"No registration found for " + pid + " in " + eid};
 
     MainData::removeEntry(data_struct.registrations, data_struct.registrationCount, i);
+
+    std::ofstream registration_file{"./inputFiles/Registration.txt", std::ios::trunc};
+    if (!registration_file)
+        throw std::runtime_error{"Cannot open file: ./inputFiles/Registration.txt"};
+
+    for (int i = 0; i < data_struct.registrationCount; ++i)
+    {
+        Registration* reg = static_cast<Registration*>(data_struct.registrations[i].get());
+        registration_file << reg->getParticipantId() << ';' << reg->getEventId() << '\n';
+    }
+
+    registration_file.flush();
+
     std::cout << "Registration cancelled.\n";
 }
 

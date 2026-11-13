@@ -6,11 +6,13 @@
 #include "MainData.hpp"
 
 #include <cctype> // std::toupper
+#include <fstream> // std::ofstream, std::ios::trunc
 #include <iomanip> // std::left, std::setw
 #include <iostream> // std::cin, std::cout, std::cerr
 #include <memory> // std::unique_ptr
 #include <stdexcept> // std::runtime_error
 #include <string> // std::string, std::getline, std::stoi
+
 
 struct Data_s
 {
