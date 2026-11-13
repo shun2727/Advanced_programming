@@ -1,10 +1,7 @@
 #include "Event.hpp"
 
 Event::Event(std::string eventId, std::string eventName, std::string eventType, double registrationFee)
-    : event_id_(std::move(eventId)),
-      event_name_(std::move(eventName)),
-      event_type_(std::move(eventType)),
-      registration_fee_(registrationFee)
+    : event_id_(std::move(eventId)), event_name_(std::move(eventName)), event_type_(std::move(eventType)), registration_fee_(registrationFee)
 {
 
 }

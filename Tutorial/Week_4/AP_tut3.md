@@ -13,7 +13,7 @@ constant values.
 **advanced for** loop. 
 8.  The keyword **break** immediately terminates a loop. 
 9.  The keyword **continue** skips the remainder of the current iteration. 
-10. A **alias** is another name for an existing variable. (*)
+10. A **reference** is another name for an existing variable. (*)
 11. A **pointer** stores the memory address of another variable. 
 12. The Modern C++ container that has a fixed size known at compile time is **array**. 
 13. The Modern C++ container that can grow and shrink dynamically is **vector**. 
@@ -39,7 +39,7 @@ Section B : Fill in the blanks
 2.  A **abstact data type (ADT)** is a data type defined by its operations and behaviour rather than its implementation details. 
 3.  A **abstract data type** is a data type defined by its operations and behaviour rather than its implementation details. 
 4.  A **union** allows multiple members to share the same memory location. 
-5.  A **struct** is a user-defined type that represents a set of named 
+5.  A **enum** is a user-defined type that represents a set of named 
 constants. 
 6.  The Modern C++ alternative to traditional enum is **enum class**. 
 7.  **typdef** creates an alias or nickname for an existing type. 
@@ -55,7 +55,7 @@ Modern C++.
 16. The Modern C++ replacement for rand() and srand() is the **random** library. 
 17. The Modern C++ replacement for a traditional union is **std::varaint**. (*)
 18. The Modern C++ replacement for manual memory management using new and delete is 
-**RAII(Resource Acquisition is Initialization)**. 
+**smart pointers**. 
 19. The destructor of an object is automatically called when the object goes out of 
 **scope**. 
 20. In a structure, members are **public** by default

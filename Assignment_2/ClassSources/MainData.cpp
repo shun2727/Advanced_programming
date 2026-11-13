@@ -132,7 +132,7 @@ void MainData::addRegistraionEntry(std::unique_ptr<MainData> arr[], int& count, 
 void MainData::removeEntry(std::unique_ptr<MainData> arr[], int& count, int index)
 {
     if (index < 0 || index >= count)
-        throw std::out_of_range{"Record index is out of range"};
+        throw std::runtime_error{"Record index is out of range"};
 
     for (int i = index; i < count - 1; ++i)
         arr[i] = std::move(arr[i + 1]);

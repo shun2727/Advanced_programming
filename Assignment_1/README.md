@@ -133,3 +133,5 @@ Math funcitons within findBestWorker :
 These resources alone were not sufficient for me to fully grasp the concepts such a when it came to how the normal distribution and random number functions works beneath, how do i utilize span and the usage of stringstream. 
 
 Therefore AI was used to give more compreensive examples, to break down concepts and to provide guidance on implementation. 
+
+If there are doubts on the progress on the assignment, view the git logs from my github page : https://github.com/shun2727/Advanced_programming.git

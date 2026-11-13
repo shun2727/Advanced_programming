@@ -1,12 +1,8 @@
-CXX := g++
-CXXFLAGS := -std=c++20
-CPPFLAGS := -IIncludes
+CFLAGS = -Wall -Wextra -Werror -std=c++20 -IIncludes
+CC = g++
 
-TARGET := event_management_system
-BUILD_DIR := build
-
-SRCS := \
-	Main/driver.cpp \
+NAME = event_management_system
+SRC = Main/driver.cpp \
 	ClassSources/Event.cpp \
 	ClassSources/Participant.cpp \
 	ClassSources/Registration.cpp \
@@ -15,23 +11,26 @@ SRCS := \
 	Sources/HelperFunctions.cpp \
 	Sources/ManageRegistraions.cpp \
 	Sources/MenuFeatures.cpp
+OBJ = $(SRC:.cpp=.o)
 
-OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $@
 
-all: $(TARGET)
+all : $(NAME)
 
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@
+#how do we create the objects (by compiling with -c)
+#create the .o by having it's .cpp counterpart
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/%.o: %.cpp
-	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
-
-clean:
-	rm -rf $(BUILD_DIR) $(TARGET)
+#specify program, say what it depends on (object files) specify how to make object files from cpp files
 
 fclean: clean
+	rm -f $(NAME)
 
-re: clean all
+clean:
+	rm -f $(OBJ)
 
-.PHONY: all clean fclean re
+re: fclean all
+
+.PHONY : clean fclean re all

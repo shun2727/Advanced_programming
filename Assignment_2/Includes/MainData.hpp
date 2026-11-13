@@ -3,12 +3,12 @@
 #include <fstream> // std::ifstream, std::getline
 #include <iostream> // std::cout, std::cerr
 #include <memory> // std::unique_ptr
-#include <stdexcept> // std::runtime_error, std::out_of_range
+#include <stdexcept> // std::runtime_error
 #include <string> // std::string
 #include <utility> // std::move
 
 /**
- * @brief this acts as an abstract class so that the derived / child classes have a blueprint
+ * @brief this acts as an abstract class so that the derived / child classes have a blueprint but its not fully abstract
  * 
  */
 class MainData{
